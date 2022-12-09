@@ -1,0 +1,23 @@
+### 虚拟机需要把NetworkManager关闭掉
+systemctl stop NetworkManager
+systemctl disable NetworkManager
+
+
+
+
+1。配置LSV服务器的虚拟ip
+2.配置两台nginx的虚拟ip,这个虚拟ip需要和lVS服务器的虚拟ip保持一致
+
+#使用ipvsadm创建虚拟集群
+ipvsadm -A -t 92.168.1.150:80 -s rr
+给虚拟集群添加实例
+ipvsadm -a -t 192.168.1.150:80 -r 192.168.1.122:80 -g
+
+ipvsadm -a -t 192.168.1.150:80 -r 192.168.1.121:80 -g
+
+#用户持久访问某个ip的过期时间 单位为秒
+ipvsadm --set 1 1 1
+#查询-用户持久访问某个ip的过期时间
+ipvsadm -Lnc
+
+ipvsadm -C #清空所有配置

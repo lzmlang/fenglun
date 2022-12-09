@@ -1,0 +1,70 @@
+schemaName: sharding_master_slave_db
+
+dataSources:
+  ds0:
+    url: jdbc:postgresql://localhost:5432/ds0
+    username: root
+    password:
+    connectionTimeoutMilliseconds: 30000
+    idleTimeoutMilliseconds: 60000
+    maxLifetimeMilliseconds: 1800000
+    maxPoolSize: 65
+  ds1:
+    url: jdbc:postgresql://localhost:5432/ds1
+    username: root
+    password:
+    connectionTimeoutMilliseconds: 30000
+    idleTimeoutMilliseconds: 60000
+    maxLifetimeMilliseconds: 1800000
+    maxPoolSize: 65
+
+shardingRule:
+  tables:
+    t_order:
+      actualDataNodes: ms_ds${0..1}.t_order${0..1}
+      databaseStrategy:
+        inline:
+          shardingColumn: id
+          algorithmExpression: ms_ds${user_id % 2}
+      tableStrategy:
+        inline:
+          shardingColumn: order_id
+          algorithmExpression: t_order${order_id % 2}
+      keyGenerator:
+        type: SNOWFLAKE
+        column: order_id
+    t_order_item:
+      actualDataNodes: ms_ds${0..1}.t_order_item${0..1}
+      databaseStrategy:
+        inline:
+          shardingColumn: user_id
+          algorithmExpression: ms_ds${user_id % 2}
+      tableStrategy:
+        inline:
+          shardingColumn: order_id
+          algorithmExpression: t_order_item${order_id % 2}
+      keyGenerator:
+        type: SNOWFLAKE
+        column: order_item_id
+  bindingTables:
+    - t_order,t_order_item
+  broadcastTables:
+    - t_config
+
+  defaultDataSourceName: ds0
+  defaultTableStrategy:
+    none:
+
+  masterSlaveRules:
+    ms_ds0:
+      masterDataSourceName: ds0
+      slaveDataSourceNames:
+        - ds0_slave0
+        - ds0_slave1
+      loadBalanceAlgorithmType: ROUND_ROBIN
+    ms_ds1:
+      masterDataSourceName: ds1
+      slaveDataSourceNames:
+        - ds1_slave0
+        - ds1_slave1
+      loadBalanceAlgorithmType: ROUND_ROBIN

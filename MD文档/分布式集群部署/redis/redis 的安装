@@ -1,0 +1,38 @@
+安装c++的运行环境
+yum install gcc-c++
+创建redis的配置文件以及持久化文件的目录
+mkdir /usr/local/redis
+mkdir /usr/local/redis/working
+
+进入解压后的redis目录执行
+make && make install
+
+配置redis
+在utils下，拷贝redis_init_script 到/etc/init.d 目录，目的要把redis作为开机自启动
+拷贝解压目录中的redis-conf到/usr/local/redis/目录中
+赋权：chmod 777 redis_init_script
+
+修改redis-conf:
+daemonize yes //后台启动
+dir /usr/local/redis/working //工作目录
+ //使用ip登录
+bind 0.0.0.0
+//使用登录密码
+requirepass root
+
+redis在linux环境下自启动:
+1: redis_init_script添加
+#chkconfig: 22345 10 90
+#description: Start and Stop redis
+2：执行 chkconfig redis_init_script on
+关于redis启动需要的账号也加到了脚本中
+
+
+
+执行完上面的操作后
+redis_init_script start 启动redis
+进入linux本地的redis-cli
+登录密码 auth password
+
+查看当前环境的redis是否存活
+redis-cli -a root ping

@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daydayup.mapper.ExpressCompanyMappingMapper">
+  <resultMap id="BaseResultMap" type="com.daydayup.pojo.ExpressCompanyMapping">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="match_type" jdbcType="VARCHAR" property="matchType" />
+    <result column="platform_biz_id" jdbcType="VARCHAR" property="platformBizId" />
+    <result column="platform_biz_code" jdbcType="VARCHAR" property="platformBizCode" />
+    <result column="platform_bizname" jdbcType="VARCHAR" property="platformBizname" />
+    <result column="relative_express_company_id" jdbcType="BIGINT" property="relativeExpressCompanyId" />
+    <result column="sys_biz_code" jdbcType="VARCHAR" property="sysBizCode" />
+    <result column="sys_bizname" jdbcType="VARCHAR" property="sysBizname" />
+    <result column="active" jdbcType="BIT" property="active" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
+    <result column="enable_status" jdbcType="BIT" property="enableStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, source, match_type, platform_biz_id, platform_biz_code, platform_bizname, relative_express_company_id, 
+    sys_biz_code, sys_bizname, active, created, modified, enable_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from express_company_mapping
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from express_company_mapping
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.daydayup.pojo.ExpressCompanyMapping">
+    insert into express_company_mapping (id, source, match_type, 
+      platform_biz_id, platform_biz_code, platform_bizname, 
+      relative_express_company_id, sys_biz_code, sys_bizname, 
+      active, created, modified, 
+      enable_status)
+    values (#{id,jdbcType=BIGINT}, #{source,jdbcType=VARCHAR}, #{matchType,jdbcType=VARCHAR}, 
+      #{platformBizId,jdbcType=VARCHAR}, #{platformBizCode,jdbcType=VARCHAR}, #{platformBizname,jdbcType=VARCHAR}, 
+      #{relativeExpressCompanyId,jdbcType=BIGINT}, #{sysBizCode,jdbcType=VARCHAR}, #{sysBizname,jdbcType=VARCHAR}, 
+      #{active,jdbcType=BIT}, #{created,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}, 
+      #{enableStatus,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.daydayup.pojo.ExpressCompanyMapping">
+    insert into express_company_mapping
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="matchType != null">
+        match_type,
+      </if>
+      <if test="platformBizId != null">
+        platform_biz_id,
+      </if>
+      <if test="platformBizCode != null">
+        platform_biz_code,
+      </if>
+      <if test="platformBizname != null">
+        platform_bizname,
+      </if>
+      <if test="relativeExpressCompanyId != null">
+        relative_express_company_id,
+      </if>
+      <if test="sysBizCode != null">
+        sys_biz_code,
+      </if>
+      <if test="sysBizname != null">
+        sys_bizname,
+      </if>
+      <if test="active != null">
+        active,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="modified != null">
+        modified,
+      </if>
+      <if test="enableStatus != null">
+        enable_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="matchType != null">
+        #{matchType,jdbcType=VARCHAR},
+      </if>
+      <if test="platformBizId != null">
+        #{platformBizId,jdbcType=VARCHAR},
+      </if>
+      <if test="platformBizCode != null">
+        #{platformBizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="platformBizname != null">
+        #{platformBizname,jdbcType=VARCHAR},
+      </if>
+      <if test="relativeExpressCompanyId != null">
+        #{relativeExpressCompanyId,jdbcType=BIGINT},
+      </if>
+      <if test="sysBizCode != null">
+        #{sysBizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sysBizname != null">
+        #{sysBizname,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        #{active,jdbcType=BIT},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableStatus != null">
+        #{enableStatus,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.daydayup.pojo.ExpressCompanyMapping">
+    update express_company_mapping
+    <set>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="matchType != null">
+        match_type = #{matchType,jdbcType=VARCHAR},
+      </if>
+      <if test="platformBizId != null">
+        platform_biz_id = #{platformBizId,jdbcType=VARCHAR},
+      </if>
+      <if test="platformBizCode != null">
+        platform_biz_code = #{platformBizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="platformBizname != null">
+        platform_bizname = #{platformBizname,jdbcType=VARCHAR},
+      </if>
+      <if test="relativeExpressCompanyId != null">
+        relative_express_company_id = #{relativeExpressCompanyId,jdbcType=BIGINT},
+      </if>
+      <if test="sysBizCode != null">
+        sys_biz_code = #{sysBizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sysBizname != null">
+        sys_bizname = #{sysBizname,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        active = #{active,jdbcType=BIT},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableStatus != null">
+        enable_status = #{enableStatus,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.daydayup.pojo.ExpressCompanyMapping">
+    update express_company_mapping
+    set source = #{source,jdbcType=VARCHAR},
+      match_type = #{matchType,jdbcType=VARCHAR},
+      platform_biz_id = #{platformBizId,jdbcType=VARCHAR},
+      platform_biz_code = #{platformBizCode,jdbcType=VARCHAR},
+      platform_bizname = #{platformBizname,jdbcType=VARCHAR},
+      relative_express_company_id = #{relativeExpressCompanyId,jdbcType=BIGINT},
+      sys_biz_code = #{sysBizCode,jdbcType=VARCHAR},
+      sys_bizname = #{sysBizname,jdbcType=VARCHAR},
+      active = #{active,jdbcType=BIT},
+      created = #{created,jdbcType=TIMESTAMP},
+      modified = #{modified,jdbcType=TIMESTAMP},
+      enable_status = #{enableStatus,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.daydayup.pojo.ExpressCompanyMapping">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="match_type" jdbcType="VARCHAR" property="matchType" />
+    <result column="platform_biz_id" jdbcType="VARCHAR" property="platformBizId" />
+    <result column="platform_biz_code" jdbcType="VARCHAR" property="platformBizCode" />
+    <result column="platform_bizname" jdbcType="VARCHAR" property="platformBizname" />
+    <result column="relative_express_company_id" jdbcType="BIGINT" property="relativeExpressCompanyId" />
+    <result column="sys_biz_code" jdbcType="VARCHAR" property="sysBizCode" />
+    <result column="sys_bizname" jdbcType="VARCHAR" property="sysBizname" />
+    <result column="active" jdbcType="BIT" property="active" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
+    <result column="enable_status" jdbcType="BIT" property="enableStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, source, match_type, platform_biz_id, platform_biz_code, platform_bizname, relative_express_company_id, 
+    sys_biz_code, sys_bizname, active, created, modified, enable_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from express_company_mapping
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from express_company_mapping
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.daydayup.pojo.ExpressCompanyMapping">
+    insert into express_company_mapping (id, source, match_type, 
+      platform_biz_id, platform_biz_code, platform_bizname, 
+      relative_express_company_id, sys_biz_code, sys_bizname, 
+      active, created, modified, 
+      enable_status)
+    values (#{id,jdbcType=BIGINT}, #{source,jdbcType=VARCHAR}, #{matchType,jdbcType=VARCHAR}, 
+      #{platformBizId,jdbcType=VARCHAR}, #{platformBizCode,jdbcType=VARCHAR}, #{platformBizname,jdbcType=VARCHAR}, 
+      #{relativeExpressCompanyId,jdbcType=BIGINT}, #{sysBizCode,jdbcType=VARCHAR}, #{sysBizname,jdbcType=VARCHAR}, 
+      #{active,jdbcType=BIT}, #{created,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}, 
+      #{enableStatus,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.daydayup.pojo.ExpressCompanyMapping">
+    insert into express_company_mapping
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="matchType != null">
+        match_type,
+      </if>
+      <if test="platformBizId != null">
+        platform_biz_id,
+      </if>
+      <if test="platformBizCode != null">
+        platform_biz_code,
+      </if>
+      <if test="platformBizname != null">
+        platform_bizname,
+      </if>
+      <if test="relativeExpressCompanyId != null">
+        relative_express_company_id,
+      </if>
+      <if test="sysBizCode != null">
+        sys_biz_code,
+      </if>
+      <if test="sysBizname != null">
+        sys_bizname,
+      </if>
+      <if test="active != null">
+        active,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="modified != null">
+        modified,
+      </if>
+      <if test="enableStatus != null">
+        enable_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="matchType != null">
+        #{matchType,jdbcType=VARCHAR},
+      </if>
+      <if test="platformBizId != null">
+        #{platformBizId,jdbcType=VARCHAR},
+      </if>
+      <if test="platformBizCode != null">
+        #{platformBizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="platformBizname != null">
+        #{platformBizname,jdbcType=VARCHAR},
+      </if>
+      <if test="relativeExpressCompanyId != null">
+        #{relativeExpressCompanyId,jdbcType=BIGINT},
+      </if>
+      <if test="sysBizCode != null">
+        #{sysBizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sysBizname != null">
+        #{sysBizname,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        #{active,jdbcType=BIT},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableStatus != null">
+        #{enableStatus,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.daydayup.pojo.ExpressCompanyMapping">
+    update express_company_mapping
+    <set>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="matchType != null">
+        match_type = #{matchType,jdbcType=VARCHAR},
+      </if>
+      <if test="platformBizId != null">
+        platform_biz_id = #{platformBizId,jdbcType=VARCHAR},
+      </if>
+      <if test="platformBizCode != null">
+        platform_biz_code = #{platformBizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="platformBizname != null">
+        platform_bizname = #{platformBizname,jdbcType=VARCHAR},
+      </if>
+      <if test="relativeExpressCompanyId != null">
+        relative_express_company_id = #{relativeExpressCompanyId,jdbcType=BIGINT},
+      </if>
+      <if test="sysBizCode != null">
+        sys_biz_code = #{sysBizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sysBizname != null">
+        sys_bizname = #{sysBizname,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        active = #{active,jdbcType=BIT},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableStatus != null">
+        enable_status = #{enableStatus,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.daydayup.pojo.ExpressCompanyMapping">
+    update express_company_mapping
+    set source = #{source,jdbcType=VARCHAR},
+      match_type = #{matchType,jdbcType=VARCHAR},
+      platform_biz_id = #{platformBizId,jdbcType=VARCHAR},
+      platform_biz_code = #{platformBizCode,jdbcType=VARCHAR},
+      platform_bizname = #{platformBizname,jdbcType=VARCHAR},
+      relative_express_company_id = #{relativeExpressCompanyId,jdbcType=BIGINT},
+      sys_biz_code = #{sysBizCode,jdbcType=VARCHAR},
+      sys_bizname = #{sysBizname,jdbcType=VARCHAR},
+      active = #{active,jdbcType=BIT},
+      created = #{created,jdbcType=TIMESTAMP},
+      modified = #{modified,jdbcType=TIMESTAMP},
+      enable_status = #{enableStatus,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

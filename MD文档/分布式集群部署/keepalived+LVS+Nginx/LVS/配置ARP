@@ -1,0 +1,22 @@
+1. 打开sysctl.conf:
+vim /etc/sysctl.conf
+2. 配置所有网卡、默认网卡以及虚拟网卡的arp响应级别和通告行为，分别对应： all ， default ， lo ：
+# configration for lvs
+net.ipv4.conf.all.arp_ignore = 1
+net.ipv4.conf.default.arp_ignore = 1
+net.ipv4.conf.lo.arp_ignore = 1
+net.ipv4.conf.all.arp_announce = 2
+net.ipv4.conf.default.arp_announce = 2
+net.ipv4.conf.lo.arp_announce = 2
+
+3.添加虚拟ip的路由
+route  add -host 192.168.1.150 dev lo:1
+4.添加开机启动
+echo "route add -host 192.168.1.150 dev lo:1" >> /etc/rc.local
+
+#设置轮询的缓存时间单位为秒
+ipvsadm -E -t 192.168.1.150:80 -s rr -p 5
+#用户持久访问某个ip的过期时间 单位为秒
+ipvsadm --set 1 1 1
+#查询-用户持久访问某个ip的过期时间
+ipvsadm -Lnc

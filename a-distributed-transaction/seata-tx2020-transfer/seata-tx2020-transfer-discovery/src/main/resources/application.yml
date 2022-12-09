@@ -1,0 +1,26 @@
+server:
+    port: 8761
+
+spring:
+    application:
+        name: register
+management:
+    server:
+        servlet:
+            context-path: /
+eureka:
+    client:
+        service-url:
+            defaultZone: http://localhost:8761/eureka/
+        #注册中心不需要注册自己
+        register-with-eureka: false
+        #注册中心不需要去发现服务
+        fetch-registry: false
+    server:
+        #自我保护机制，关闭
+        enable-self-preservation: false
+    instance:
+        prefer-ip-address: true
+        instance-id: ${spring.cloud.client.ipAddress}:${spring.application.name}:${server.port}
+
+

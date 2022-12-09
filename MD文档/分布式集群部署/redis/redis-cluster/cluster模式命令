@@ -1,0 +1,11 @@
+开始之前先将所有机器的 aof备份和rdb备份文件删除，然后重新启动redis
+# 添加cluster集群
+redis-cli  -a root --cluster create 192.168.1.122:6379 192.168.1.118:6379 192.168.1.119:6379
+# 检查集群的信息
+redis-cli -a root --cluster check 192.168.1.122:6379
+# 连接到集群，只要连接到某一台机器就好了
+redis-cli -c -a root  -h 192.168.1.122 -p 6379
+# 查看集群信息
+cluster info
+# 所有的节点信息
+cluster nodes

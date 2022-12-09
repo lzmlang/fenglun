@@ -1,0 +1,74 @@
+spring:
+  application:
+    name: saul-demo-service
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+  jackson:
+    default-property-inclusion:  ALWAYS
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+  port: 9102
+  servlet:
+    context-path: /team
+mybatis-plus:
+  mapper-locations:
+    - classpath*:/mapper/**/*Mapper.xml
+    - classpath*:com/saul/boot/**/*Mapper.xml
+  typeAliasesPackage: com.saul.boot.**.entity
+  global-config:
+    db-config:
+      id-type: ID_WORKER
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      table-underline: true
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    call-setters-on-nulls: true
+  jasypt:
+    encryptor:
+      password: jasypt
+swagger:
+  enabled: true
+  title: PROJECT API
+  description: 一个项目名字
+  version: 0.1
+  license: saul
+  license-url: http://www.baidu.com
+  base-package: com.saul.boot
+  base-path: /**
+  exclude-path: /error, /ops/**
+  authorization:
+    keyName: Authorization
+  docket:
+    base:
+      base-package: com.nsc.boot.business.base
+      version: 0.1
+      title: 基础服务
+      description: 基础服务
+    user:
+      base-package: com.nsc.boot.business.user
+      version: 0.1
+      title: 用户服务
+      description: 用户服务
+feign:
+  hystrix:
+    enabled: false
+  client:
+    config:
+      default:
+        connectTimeout: 8000
+        readTimeout: 8000
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    io.swagger.models.parameters.AbstractSerializableParameter: error
+

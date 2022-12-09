@@ -1,0 +1,13 @@
+
+1/ 添加基本的依赖： mysql driver / spring data jpa /web 依赖 /eureka client。
+
+2/ 有一个实体类Account : 账户实体。
+
+3/ 持久化AccountService 
+
+4/ 有一个AccountService， 扣减金额 debit.
+
+5/ 有controller对外提供访问.
+
+6/ 需要添加application.properties : 数据源 / jpa / eureka 的注册地址配置。
+

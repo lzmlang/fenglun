@@ -1,0 +1,57 @@
+logging:
+    pattern:
+        dateformat: HH:mm:ss
+mybatis:
+    mapper-locations: /mybatis/*.xml
+spring:
+    shardingsphere:
+        datasource:
+            ds0:
+                driver-class-name: com.mysql.cj.jdbc.Driver
+                jdbcUrl: jdbc:mysql://192.168.1.118:3306/sharding_order?serverTimezone=Asia/Shanghai
+                password: rootroot
+                type: com.zaxxer.hikari.HikariDataSource
+                username: root
+            slave0:
+                driver-class-name: com.mysql.cj.jdbc.Driver
+                jdbcUrl: jdbc:mysql://192.168.1.119:3306/sharding_order?serverTimezone=Asia/Shanghai
+                password: rootroot
+                type: com.zaxxer.hikari.HikariDataSource
+                username: root
+            ms1:
+                driver-class-name: com.mysql.cj.jdbc.Driver
+                jdbcUrl: jdbc:mysql://192.168.1.7:3306/shard_order?serverTimezone=Asia/Shanghai
+                password: rootroot
+                type: com.zaxxer.hikari.HikariDataSource
+                username: root
+            names: ds0,ms1,slave0
+        sharding:
+            broadcast-tables: area
+            master-slave-rules:
+                ms0:
+                    load-balance-algorithm-type: RANDOM
+                    master-data-source-name: ds0
+                    slave-data-source-names: slave0
+            tables:
+                t_order:
+                    actual-data-nodes: ms$->{0..1}.t_order_$->{1..2}
+                    database-strategy:
+                        inline:
+                            algorithm-expression: ms$->{user_id % 2}
+                            sharding-column: user_id
+                    key-generator:
+                        column: order_id
+                        props:
+                            max:
+                                tolerate:
+                                    time:
+                                        difference:
+                                            milliseconds: 10 #最大容忍回调时间
+                            worker:
+                                id: 345 #不大于1024
+                        type: SNOWFLAKE
+                    table-strategy:
+                        standard:
+                            precise-algorithm-class-name: com.example.shardingjdbcdemo.sharding.MySharding
+                            sharding-column: order_id #分表列
+                            algorithm-expression: t_order_$->{order_id%2+1} #分表号路由规则

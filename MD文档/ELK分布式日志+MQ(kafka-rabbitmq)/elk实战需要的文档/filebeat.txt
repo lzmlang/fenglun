@@ -1,0 +1,43 @@
+filebeat安装：
+
+cd /usr/local/software
+tar -zxvf filebeat-6.4.3-linux-x86_64.tar.gz -C /usr/local/
+cd /usr/local
+mv filebeat-6.4.3-linux-x86_64/ filebeat-6.4.3
+
+## 配置filebeat，可以参考filebeat.full.yml中的配置。
+vim /usr/local/filebeat-5.6.2/filebeat.yml
+
+filebeat启动：
+
+## 检查配置是否正确
+cd /usr/local/filebeat-6.4.3
+./filebeat -c filebeat.yml -configtest
+## Config OK
+
+## 启动filebeat,正常启动的filebeat也能创建好topic
+/usr/local/filebeat-6.4.3/filebeat &
+ps -ef | grep filebeat
+
+
+
+
+## 启动kafka：
+/usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server.properties &
+
+## 查看topic列表：
+# 注意：如果启动kafka的时，注册到zk的时候加了zk的节点名字“kafka”，后续kafka的操作要使用192.168.1.122:2181/kafka
+
+sh /usr/local/kafka/bin/kafka-topics.sh --zookeeper 127.0.0.1:2181/kafka --list
+
+## 创建topic
+sh kafka-topics.sh --zookeeper 127.0.0.1:2181 --create --topic app-log-collector --partitions 1  --replication-factor 1
+sh kafka-topics.sh --zookeeper 127.0.0.1:2181 --create --topic error-log-collector --partitions 1  --replication-factor 1
+
+## 查看组的消费情况
+sh /usr/local/kafka/bin/kafka-consumer-groups.sh --bootstrap-server 192.168.1.122:9092 --describe --group app-log-group
+
+## 查看topic情况
+sh /usr/local/kafka/bin/kafka-topics.sh --zookeeper 127.0.0.1:2181/kafka --topic app-log-collector --describe
+
+nohup java -Xms64m -Xmx128m -Xmn64m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/data/tmp/heapdump.hprof -jar collector.jar >/dev/null 2>&1 &

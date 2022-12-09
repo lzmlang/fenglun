@@ -1,0 +1,38 @@
+spring:
+  profiles: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.0.44:18848
+#  main:
+#    allow-bean-definition-overriding: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/mysql?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: root
+  redis:
+    host: 146.56.198.194
+    port: 6379
+    password: 123456
+    timeout: 3000
+    database: 1
+    timeToLive: 30
+    lettuce:
+      pool:
+        max-idle: 100
+        min-idle: 100
+        max-active: 500
+        max-wait: 2000
+  rabbitmq:
+    host: 192.168.2.253
+    port: 5672
+    username: rabbit
+    password: rabbit
+task:
+  pool:
+    corePoolSize: 5 #设置核心线程数
+    maxPoolSize: 20  #设置最大线程数
+    keepAliveSeconds: 300 #设置线程活跃时间（秒）
+    queueCapacity: 50 #设置队列容量
+    threadNamePrefix: "thread-omll-provider-%d" # 线程名称前缀

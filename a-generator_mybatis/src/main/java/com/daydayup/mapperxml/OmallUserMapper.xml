@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daydayup.mapper.OmallUserMapper">
+  <resultMap id="BaseResultMap" type="com.daydayup.pojo.OmallUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="company_id" jdbcType="BIGINT" property="companyId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="short_name" jdbcType="VARCHAR" property="shortName" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="auth_field_list" jdbcType="VARCHAR" property="authFieldList" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="token_expire" jdbcType="TIMESTAMP" property="tokenExpire" />
+    <result column="has_exist_deadline" jdbcType="BIT" property="hasExistDeadline" />
+    <result column="deadline" jdbcType="TIMESTAMP" property="deadline" />
+    <result column="version" jdbcType="VARCHAR" property="version" />
+    <result column="active" jdbcType="BIT" property="active" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
+    <result column="enable_status" jdbcType="BIT" property="enableStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, source, company_id, user_id, name, short_name, remark, auth_field_list, token, 
+    token_expire, has_exist_deadline, deadline, version, active, created, modified, enable_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from omall_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from omall_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.daydayup.pojo.OmallUser">
+    insert into omall_user (id, source, company_id, 
+      user_id, name, short_name, 
+      remark, auth_field_list, token, 
+      token_expire, has_exist_deadline, deadline, 
+      version, active, created, 
+      modified, enable_status)
+    values (#{id,jdbcType=BIGINT}, #{source,jdbcType=VARCHAR}, #{companyId,jdbcType=BIGINT}, 
+      #{userId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{authFieldList,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
+      #{tokenExpire,jdbcType=TIMESTAMP}, #{hasExistDeadline,jdbcType=BIT}, #{deadline,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=VARCHAR}, #{active,jdbcType=BIT}, #{created,jdbcType=TIMESTAMP}, 
+      #{modified,jdbcType=TIMESTAMP}, #{enableStatus,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.daydayup.pojo.OmallUser">
+    insert into omall_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="shortName != null">
+        short_name,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="authFieldList != null">
+        auth_field_list,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="tokenExpire != null">
+        token_expire,
+      </if>
+      <if test="hasExistDeadline != null">
+        has_exist_deadline,
+      </if>
+      <if test="deadline != null">
+        deadline,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="active != null">
+        active,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="modified != null">
+        modified,
+      </if>
+      <if test="enableStatus != null">
+        enable_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="authFieldList != null">
+        #{authFieldList,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenExpire != null">
+        #{tokenExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hasExistDeadline != null">
+        #{hasExistDeadline,jdbcType=BIT},
+      </if>
+      <if test="deadline != null">
+        #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        #{active,jdbcType=BIT},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableStatus != null">
+        #{enableStatus,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.daydayup.pojo.OmallUser">
+    update omall_user
+    <set>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        short_name = #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="authFieldList != null">
+        auth_field_list = #{authFieldList,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenExpire != null">
+        token_expire = #{tokenExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hasExistDeadline != null">
+        has_exist_deadline = #{hasExistDeadline,jdbcType=BIT},
+      </if>
+      <if test="deadline != null">
+        deadline = #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        active = #{active,jdbcType=BIT},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableStatus != null">
+        enable_status = #{enableStatus,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.daydayup.pojo.OmallUser">
+    update omall_user
+    set source = #{source,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      short_name = #{shortName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      auth_field_list = #{authFieldList,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      token_expire = #{tokenExpire,jdbcType=TIMESTAMP},
+      has_exist_deadline = #{hasExistDeadline,jdbcType=BIT},
+      deadline = #{deadline,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=VARCHAR},
+      active = #{active,jdbcType=BIT},
+      created = #{created,jdbcType=TIMESTAMP},
+      modified = #{modified,jdbcType=TIMESTAMP},
+      enable_status = #{enableStatus,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.daydayup.pojo.OmallUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="company_id" jdbcType="BIGINT" property="companyId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="short_name" jdbcType="VARCHAR" property="shortName" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="auth_field_list" jdbcType="VARCHAR" property="authFieldList" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="token_expire" jdbcType="TIMESTAMP" property="tokenExpire" />
+    <result column="has_exist_deadline" jdbcType="BIT" property="hasExistDeadline" />
+    <result column="deadline" jdbcType="TIMESTAMP" property="deadline" />
+    <result column="version" jdbcType="VARCHAR" property="version" />
+    <result column="active" jdbcType="BIT" property="active" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
+    <result column="enable_status" jdbcType="BIT" property="enableStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, source, company_id, user_id, name, short_name, remark, auth_field_list, token, 
+    token_expire, has_exist_deadline, deadline, version, active, created, modified, enable_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from omall_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from omall_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.daydayup.pojo.OmallUser">
+    insert into omall_user (id, source, company_id, 
+      user_id, name, short_name, 
+      remark, auth_field_list, token, 
+      token_expire, has_exist_deadline, deadline, 
+      version, active, created, 
+      modified, enable_status)
+    values (#{id,jdbcType=BIGINT}, #{source,jdbcType=VARCHAR}, #{companyId,jdbcType=BIGINT}, 
+      #{userId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{authFieldList,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
+      #{tokenExpire,jdbcType=TIMESTAMP}, #{hasExistDeadline,jdbcType=BIT}, #{deadline,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=VARCHAR}, #{active,jdbcType=BIT}, #{created,jdbcType=TIMESTAMP}, 
+      #{modified,jdbcType=TIMESTAMP}, #{enableStatus,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.daydayup.pojo.OmallUser">
+    insert into omall_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="shortName != null">
+        short_name,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="authFieldList != null">
+        auth_field_list,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="tokenExpire != null">
+        token_expire,
+      </if>
+      <if test="hasExistDeadline != null">
+        has_exist_deadline,
+      </if>
+      <if test="deadline != null">
+        deadline,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="active != null">
+        active,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="modified != null">
+        modified,
+      </if>
+      <if test="enableStatus != null">
+        enable_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="authFieldList != null">
+        #{authFieldList,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenExpire != null">
+        #{tokenExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hasExistDeadline != null">
+        #{hasExistDeadline,jdbcType=BIT},
+      </if>
+      <if test="deadline != null">
+        #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        #{active,jdbcType=BIT},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableStatus != null">
+        #{enableStatus,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.daydayup.pojo.OmallUser">
+    update omall_user
+    <set>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        short_name = #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="authFieldList != null">
+        auth_field_list = #{authFieldList,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenExpire != null">
+        token_expire = #{tokenExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hasExistDeadline != null">
+        has_exist_deadline = #{hasExistDeadline,jdbcType=BIT},
+      </if>
+      <if test="deadline != null">
+        deadline = #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        active = #{active,jdbcType=BIT},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableStatus != null">
+        enable_status = #{enableStatus,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.daydayup.pojo.OmallUser">
+    update omall_user
+    set source = #{source,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      short_name = #{shortName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      auth_field_list = #{authFieldList,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      token_expire = #{tokenExpire,jdbcType=TIMESTAMP},
+      has_exist_deadline = #{hasExistDeadline,jdbcType=BIT},
+      deadline = #{deadline,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=VARCHAR},
+      active = #{active,jdbcType=BIT},
+      created = #{created,jdbcType=TIMESTAMP},
+      modified = #{modified,jdbcType=TIMESTAMP},
+      enable_status = #{enableStatus,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

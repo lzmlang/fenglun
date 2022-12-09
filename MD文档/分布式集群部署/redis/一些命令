@@ -1,0 +1,1 @@
+redis-sentinel /usr/local/redis/sentinel.conf

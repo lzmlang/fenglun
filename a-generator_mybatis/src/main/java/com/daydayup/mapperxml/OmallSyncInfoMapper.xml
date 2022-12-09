@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daydayup.mapper.OmallSyncInfoMapper">
+  <resultMap id="BaseResultMap" type="com.daydayup.pojo.OmallSyncInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="company_id" jdbcType="BIGINT" property="companyId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="item_sync_status" jdbcType="BIT" property="itemSyncStatus" />
+    <result column="trade_sync_status" jdbcType="BIT" property="tradeSyncStatus" />
+    <result column="last_import_trade_time" jdbcType="TIMESTAMP" property="lastImportTradeTime" />
+    <result column="last_import_item_time" jdbcType="TIMESTAMP" property="lastImportItemTime" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
+    <result column="enable_status" jdbcType="BIT" property="enableStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, source, company_id, user_id, item_sync_status, trade_sync_status, last_import_trade_time, 
+    last_import_item_time, created, modified, enable_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from omall_sync_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from omall_sync_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.daydayup.pojo.OmallSyncInfo">
+    insert into omall_sync_info (id, source, company_id, 
+      user_id, item_sync_status, trade_sync_status, 
+      last_import_trade_time, last_import_item_time, 
+      created, modified, enable_status
+      )
+    values (#{id,jdbcType=BIGINT}, #{source,jdbcType=VARCHAR}, #{companyId,jdbcType=BIGINT}, 
+      #{userId,jdbcType=BIGINT}, #{itemSyncStatus,jdbcType=BIT}, #{tradeSyncStatus,jdbcType=BIT}, 
+      #{lastImportTradeTime,jdbcType=TIMESTAMP}, #{lastImportItemTime,jdbcType=TIMESTAMP}, 
+      #{created,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}, #{enableStatus,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.daydayup.pojo.OmallSyncInfo">
+    insert into omall_sync_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="itemSyncStatus != null">
+        item_sync_status,
+      </if>
+      <if test="tradeSyncStatus != null">
+        trade_sync_status,
+      </if>
+      <if test="lastImportTradeTime != null">
+        last_import_trade_time,
+      </if>
+      <if test="lastImportItemTime != null">
+        last_import_item_time,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="modified != null">
+        modified,
+      </if>
+      <if test="enableStatus != null">
+        enable_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="itemSyncStatus != null">
+        #{itemSyncStatus,jdbcType=BIT},
+      </if>
+      <if test="tradeSyncStatus != null">
+        #{tradeSyncStatus,jdbcType=BIT},
+      </if>
+      <if test="lastImportTradeTime != null">
+        #{lastImportTradeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastImportItemTime != null">
+        #{lastImportItemTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableStatus != null">
+        #{enableStatus,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.daydayup.pojo.OmallSyncInfo">
+    update omall_sync_info
+    <set>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="itemSyncStatus != null">
+        item_sync_status = #{itemSyncStatus,jdbcType=BIT},
+      </if>
+      <if test="tradeSyncStatus != null">
+        trade_sync_status = #{tradeSyncStatus,jdbcType=BIT},
+      </if>
+      <if test="lastImportTradeTime != null">
+        last_import_trade_time = #{lastImportTradeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastImportItemTime != null">
+        last_import_item_time = #{lastImportItemTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableStatus != null">
+        enable_status = #{enableStatus,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.daydayup.pojo.OmallSyncInfo">
+    update omall_sync_info
+    set source = #{source,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      item_sync_status = #{itemSyncStatus,jdbcType=BIT},
+      trade_sync_status = #{tradeSyncStatus,jdbcType=BIT},
+      last_import_trade_time = #{lastImportTradeTime,jdbcType=TIMESTAMP},
+      last_import_item_time = #{lastImportItemTime,jdbcType=TIMESTAMP},
+      created = #{created,jdbcType=TIMESTAMP},
+      modified = #{modified,jdbcType=TIMESTAMP},
+      enable_status = #{enableStatus,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.daydayup.pojo.OmallSyncInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="company_id" jdbcType="BIGINT" property="companyId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="item_sync_status" jdbcType="BIT" property="itemSyncStatus" />
+    <result column="trade_sync_status" jdbcType="BIT" property="tradeSyncStatus" />
+    <result column="last_import_trade_time" jdbcType="TIMESTAMP" property="lastImportTradeTime" />
+    <result column="last_import_item_time" jdbcType="TIMESTAMP" property="lastImportItemTime" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
+    <result column="enable_status" jdbcType="BIT" property="enableStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, source, company_id, user_id, item_sync_status, trade_sync_status, last_import_trade_time, 
+    last_import_item_time, created, modified, enable_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from omall_sync_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from omall_sync_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.daydayup.pojo.OmallSyncInfo">
+    insert into omall_sync_info (id, source, company_id, 
+      user_id, item_sync_status, trade_sync_status, 
+      last_import_trade_time, last_import_item_time, 
+      created, modified, enable_status
+      )
+    values (#{id,jdbcType=BIGINT}, #{source,jdbcType=VARCHAR}, #{companyId,jdbcType=BIGINT}, 
+      #{userId,jdbcType=BIGINT}, #{itemSyncStatus,jdbcType=BIT}, #{tradeSyncStatus,jdbcType=BIT}, 
+      #{lastImportTradeTime,jdbcType=TIMESTAMP}, #{lastImportItemTime,jdbcType=TIMESTAMP}, 
+      #{created,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}, #{enableStatus,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.daydayup.pojo.OmallSyncInfo">
+    insert into omall_sync_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="itemSyncStatus != null">
+        item_sync_status,
+      </if>
+      <if test="tradeSyncStatus != null">
+        trade_sync_status,
+      </if>
+      <if test="lastImportTradeTime != null">
+        last_import_trade_time,
+      </if>
+      <if test="lastImportItemTime != null">
+        last_import_item_time,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="modified != null">
+        modified,
+      </if>
+      <if test="enableStatus != null">
+        enable_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="itemSyncStatus != null">
+        #{itemSyncStatus,jdbcType=BIT},
+      </if>
+      <if test="tradeSyncStatus != null">
+        #{tradeSyncStatus,jdbcType=BIT},
+      </if>
+      <if test="lastImportTradeTime != null">
+        #{lastImportTradeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastImportItemTime != null">
+        #{lastImportItemTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableStatus != null">
+        #{enableStatus,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.daydayup.pojo.OmallSyncInfo">
+    update omall_sync_info
+    <set>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="itemSyncStatus != null">
+        item_sync_status = #{itemSyncStatus,jdbcType=BIT},
+      </if>
+      <if test="tradeSyncStatus != null">
+        trade_sync_status = #{tradeSyncStatus,jdbcType=BIT},
+      </if>
+      <if test="lastImportTradeTime != null">
+        last_import_trade_time = #{lastImportTradeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastImportItemTime != null">
+        last_import_item_time = #{lastImportItemTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableStatus != null">
+        enable_status = #{enableStatus,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.daydayup.pojo.OmallSyncInfo">
+    update omall_sync_info
+    set source = #{source,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      item_sync_status = #{itemSyncStatus,jdbcType=BIT},
+      trade_sync_status = #{tradeSyncStatus,jdbcType=BIT},
+      last_import_trade_time = #{lastImportTradeTime,jdbcType=TIMESTAMP},
+      last_import_item_time = #{lastImportItemTime,jdbcType=TIMESTAMP},
+      created = #{created,jdbcType=TIMESTAMP},
+      modified = #{modified,jdbcType=TIMESTAMP},
+      enable_status = #{enableStatus,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,29 @@
+server:
+  port: 8088
+
+spring:
+  datasource:                                           # 数据源的相关配置
+    type: com.zaxxer.hikari.HikariDataSource          # 数据源类型：HikariCP
+    driver-class-name: com.mysql.jdbc.Driver          # mysql驱动
+    url: jdbc:mysql://192.168.1.6:3306/foodie-shop-dev?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
+    username: root
+    password: root
+  redis:
+  # redis单机单实例
+    database: 1
+    host: 192.168.1.122
+    port: 6379
+    password: root
+    #redis哨兵模式
+#    database: 1
+#    password: root
+#    sentinel:
+#      master: mymaster
+#      nodes: 192.168.1.122:26379,192.168.1.118:26379,192.168.1.119:26379
+    #集群模式
+#    password: root
+#    cluster:
+#      nodes: 192.168.1.122:6379,192.168.1.118:6379,192.168.1.119:6379
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

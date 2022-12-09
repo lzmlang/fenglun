@@ -1,0 +1,43 @@
+###################### Filebeat Configuration Example #########################
+filebeat.prospectors:
+- input_type: log
+  # app-服务名称.log,为什么写死，防止发生轮转抓取历史数据
+  paths:
+    - /usr/local/logs/app-collector.log
+  document_type: "app-log"
+  multiline:
+    pattern: '^\['    # 指定匹配的表达式（匹配以“[ 开头的字符串
+    negate: true      # 是否匹配到
+    match: after      # 合并到上一行的末尾
+    max_lines: 2000   # 最大的合并的行数
+    timeout: 2s       #如果在规定时间没有新的日志事件就不等待后面的日志
+  fields:
+    logbiz: collector
+    logtopic: app-log-collector # 按服务划分用作kafka topic
+    evn: dev
+- input_type: log
+  paths:
+    - /usr/local/logs/error-collector.log
+  document_type: "error-log"
+  multiline:
+    pattern: '^\['    # 指定匹配的表达式（匹配以“[ 开头的字符串
+    negate: true      # 是否匹配到
+    match: after      # 合并到上一行的末尾
+    max_lines: 2000   # 最大的合并的行数
+    timeout: 2s       #如果在规定时间没有新的日志事件就不等待后面的日志
+  fields:
+    logbiz: collector
+    logtopic: error-log-collector # 按服务划分用作kafka topic
+    evn: dev
+output.kafka:
+  enabled: true
+  hosts: ["192.168.1.122:9092"]
+  topic: '%{[fields.logtopic]}'
+  partition.hash:
+    reachable_only: true
+  compression: gzip
+  max_message_bytes: 1000000
+  required_acks: 1 #只要kafka集群中的master接收到了就可以ack了,-1则需要所有mq的服务都接受到才能ack
+logging.to_files: true
+
+

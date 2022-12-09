@@ -1,0 +1,39 @@
+使用双网卡，同时使用2个网关的时候就需要加一条静态路由了。当然还有很多时候会需要加路由。
+一：使用 route 命令添加
+使用route 命令添加的路由，机器重启或者网卡重启后路由就失效了，方法：
+//添加到主机的路由
+# route add –host 192.168.1.11 dev eth0
+# route add –host 192.168.1.12 gw 192.168.1.1
+//添加到网络的路由
+# route add –net 192.168.1.11 netmask 255.255.255.0 eth0
+# route add –net 192.168.1.11 netmask 255.255.255.0 gw 192.168.1.1
+# route add –net 192.168.1.0/24 eth1
+//添加默认网关
+# route add default gw 192.168.2.1
+//删除路由
+# route del –host 192.168.1.11 dev eth0
+
+
+二：在linux下设置永久路由的方法： 
+CentOS7永久静态路由需要写到 /etc/sysconfig/network-scripts/route-****** 文件中，
+故在/etc/sysconfig/network-scripts/下，新建文件名为route-*****的文件，（****代表网卡名）
+比如添加两条静态路由：（网卡的设备名叫eth0）
+
+[root@centos7 ~]# vim /etc/sysconfig/network-scripts/route-eth0
+10.15.150.0/24 via 10.10.10.1 dev eth0
+10.25.250.0/24 via 10.10.10.1 dev eth0
+查看路由表
+
+[root@centos7 ~]# route  -n
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+10.25.250.0     10.10.10.1      255.255.255.0   UG    0      0        0 eth0
+10.10.10.0      0.0.0.0         255.255.255.0   U     0      0        0 eth0
+10.15.150.0     10.10.10.1      255.255.255.0   UG    0      0        0 eth0
+169.254.0.0     0.0.0.0         255.255.0.0     U     1002   0        0 eth0
+
+Destination--目标网段或主机
+Gateway--网关
+Genmask--子网掩码
+flags--标记。一些可能的标记如下：
+U——该路由可以使用

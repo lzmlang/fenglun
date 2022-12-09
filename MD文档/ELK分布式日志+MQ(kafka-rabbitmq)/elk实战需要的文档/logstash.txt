@@ -1,0 +1,24 @@
+# 解压安装
+tar -zxvf logstash-6.6.0.tar.gz -C /usr/local/
+
+## conf下配置文件说明：
+# logstash配置文件：/config/logstash.yml
+# JVM参数文件：/config/jvm.options
+#  日志格式配置文件：log4j2.properties
+#  制作Linux服务参数：/config/startup.options
+
+
+vim /usr/local/logstash-6.6.0/config/logstash.yml
+## 增加workers工作线程数 可以有效的提升logstash性能
+pipeline.workers: 16
+
+
+
+## 启动logstash
+nohup /usr/local/logstash-6.4.3/bin/logstash -f /usr/local/logstash-6.4.3/script/logstash-script.conf &
+
+nohup /usr/local/logstash-6.4.3/bin/logstash -f /usr/local/logstash-6.4.3/script/logstash-script.conf  >/dev/null 2>&1 &
+nohup /usr/local/logstash-6.4.3/bin/logstash -f /usr/local/logstash-6.4.3/script/logstash-script.conf  >/usr/local/logs/out.log 2>&1 &
+
+##注意：1:logstatsh日志收集的时区问题，可能导致两天的日志在同一个索引中
+       2:通过xpack创建watcher的时候，注意搜索的关键字需要模板化，要么就需要带上".keyWord",不然就睡搜索不到日志数据

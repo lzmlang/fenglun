@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daydayup.mapper.MctRoleAuthMapper">
+  <resultMap id="BaseResultMap" type="com.daydayup.pojo.MctRoleAuth">
+    <id column="role_auth_id" jdbcType="BIGINT" property="roleAuthId" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="auth_id" jdbcType="BIGINT" property="authId" />
+    <result column="add_status" jdbcType="BIT" property="addStatus" />
+    <result column="delete_status" jdbcType="BIT" property="deleteStatus" />
+    <result column="update_status" jdbcType="BIT" property="updateStatus" />
+    <result column="query_status" jdbcType="BIT" property="queryStatus" />
+    <result column="export_status" jdbcType="BIT" property="exportStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_auth_id, role_id, auth_id, add_status, delete_status, update_status, query_status, 
+    export_status, create_time, create_by, update_time, update_by
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mct_role_auth
+    where role_auth_id = #{roleAuthId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from mct_role_auth
+    where role_auth_id = #{roleAuthId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.daydayup.pojo.MctRoleAuth">
+    insert into mct_role_auth (role_auth_id, role_id, auth_id, 
+      add_status, delete_status, update_status, 
+      query_status, export_status, create_time, 
+      create_by, update_time, update_by
+      )
+    values (#{roleAuthId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{authId,jdbcType=BIGINT}, 
+      #{addStatus,jdbcType=BIT}, #{deleteStatus,jdbcType=BIT}, #{updateStatus,jdbcType=BIT}, 
+      #{queryStatus,jdbcType=BIT}, #{exportStatus,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.daydayup.pojo.MctRoleAuth">
+    insert into mct_role_auth
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleAuthId != null">
+        role_auth_id,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="authId != null">
+        auth_id,
+      </if>
+      <if test="addStatus != null">
+        add_status,
+      </if>
+      <if test="deleteStatus != null">
+        delete_status,
+      </if>
+      <if test="updateStatus != null">
+        update_status,
+      </if>
+      <if test="queryStatus != null">
+        query_status,
+      </if>
+      <if test="exportStatus != null">
+        export_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleAuthId != null">
+        #{roleAuthId,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="authId != null">
+        #{authId,jdbcType=BIGINT},
+      </if>
+      <if test="addStatus != null">
+        #{addStatus,jdbcType=BIT},
+      </if>
+      <if test="deleteStatus != null">
+        #{deleteStatus,jdbcType=BIT},
+      </if>
+      <if test="updateStatus != null">
+        #{updateStatus,jdbcType=BIT},
+      </if>
+      <if test="queryStatus != null">
+        #{queryStatus,jdbcType=BIT},
+      </if>
+      <if test="exportStatus != null">
+        #{exportStatus,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.daydayup.pojo.MctRoleAuth">
+    update mct_role_auth
+    <set>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="authId != null">
+        auth_id = #{authId,jdbcType=BIGINT},
+      </if>
+      <if test="addStatus != null">
+        add_status = #{addStatus,jdbcType=BIT},
+      </if>
+      <if test="deleteStatus != null">
+        delete_status = #{deleteStatus,jdbcType=BIT},
+      </if>
+      <if test="updateStatus != null">
+        update_status = #{updateStatus,jdbcType=BIT},
+      </if>
+      <if test="queryStatus != null">
+        query_status = #{queryStatus,jdbcType=BIT},
+      </if>
+      <if test="exportStatus != null">
+        export_status = #{exportStatus,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_auth_id = #{roleAuthId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.daydayup.pojo.MctRoleAuth">
+    update mct_role_auth
+    set role_id = #{roleId,jdbcType=BIGINT},
+      auth_id = #{authId,jdbcType=BIGINT},
+      add_status = #{addStatus,jdbcType=BIT},
+      delete_status = #{deleteStatus,jdbcType=BIT},
+      update_status = #{updateStatus,jdbcType=BIT},
+      query_status = #{queryStatus,jdbcType=BIT},
+      export_status = #{exportStatus,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where role_auth_id = #{roleAuthId,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.daydayup.pojo.MctRoleAuth">
+    <id column="role_auth_id" jdbcType="BIGINT" property="roleAuthId" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="auth_id" jdbcType="BIGINT" property="authId" />
+    <result column="add_status" jdbcType="BIT" property="addStatus" />
+    <result column="delete_status" jdbcType="BIT" property="deleteStatus" />
+    <result column="update_status" jdbcType="BIT" property="updateStatus" />
+    <result column="query_status" jdbcType="BIT" property="queryStatus" />
+    <result column="export_status" jdbcType="BIT" property="exportStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_auth_id, role_id, auth_id, add_status, delete_status, update_status, query_status, 
+    export_status, create_time, create_by, update_time, update_by
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mct_role_auth
+    where role_auth_id = #{roleAuthId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from mct_role_auth
+    where role_auth_id = #{roleAuthId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.daydayup.pojo.MctRoleAuth">
+    insert into mct_role_auth (role_auth_id, role_id, auth_id, 
+      add_status, delete_status, update_status, 
+      query_status, export_status, create_time, 
+      create_by, update_time, update_by
+      )
+    values (#{roleAuthId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{authId,jdbcType=BIGINT}, 
+      #{addStatus,jdbcType=BIT}, #{deleteStatus,jdbcType=BIT}, #{updateStatus,jdbcType=BIT}, 
+      #{queryStatus,jdbcType=BIT}, #{exportStatus,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.daydayup.pojo.MctRoleAuth">
+    insert into mct_role_auth
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleAuthId != null">
+        role_auth_id,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="authId != null">
+        auth_id,
+      </if>
+      <if test="addStatus != null">
+        add_status,
+      </if>
+      <if test="deleteStatus != null">
+        delete_status,
+      </if>
+      <if test="updateStatus != null">
+        update_status,
+      </if>
+      <if test="queryStatus != null">
+        query_status,
+      </if>
+      <if test="exportStatus != null">
+        export_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleAuthId != null">
+        #{roleAuthId,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="authId != null">
+        #{authId,jdbcType=BIGINT},
+      </if>
+      <if test="addStatus != null">
+        #{addStatus,jdbcType=BIT},
+      </if>
+      <if test="deleteStatus != null">
+        #{deleteStatus,jdbcType=BIT},
+      </if>
+      <if test="updateStatus != null">
+        #{updateStatus,jdbcType=BIT},
+      </if>
+      <if test="queryStatus != null">
+        #{queryStatus,jdbcType=BIT},
+      </if>
+      <if test="exportStatus != null">
+        #{exportStatus,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.daydayup.pojo.MctRoleAuth">
+    update mct_role_auth
+    <set>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="authId != null">
+        auth_id = #{authId,jdbcType=BIGINT},
+      </if>
+      <if test="addStatus != null">
+        add_status = #{addStatus,jdbcType=BIT},
+      </if>
+      <if test="deleteStatus != null">
+        delete_status = #{deleteStatus,jdbcType=BIT},
+      </if>
+      <if test="updateStatus != null">
+        update_status = #{updateStatus,jdbcType=BIT},
+      </if>
+      <if test="queryStatus != null">
+        query_status = #{queryStatus,jdbcType=BIT},
+      </if>
+      <if test="exportStatus != null">
+        export_status = #{exportStatus,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_auth_id = #{roleAuthId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.daydayup.pojo.MctRoleAuth">
+    update mct_role_auth
+    set role_id = #{roleId,jdbcType=BIGINT},
+      auth_id = #{authId,jdbcType=BIGINT},
+      add_status = #{addStatus,jdbcType=BIT},
+      delete_status = #{deleteStatus,jdbcType=BIT},
+      update_status = #{updateStatus,jdbcType=BIT},
+      query_status = #{queryStatus,jdbcType=BIT},
+      export_status = #{exportStatus,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where role_auth_id = #{roleAuthId,jdbcType=BIGINT}
+  </update>
+</mapper>

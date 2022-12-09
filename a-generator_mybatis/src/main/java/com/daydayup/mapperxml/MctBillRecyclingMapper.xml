@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daydayup.mapper.MctBillRecyclingMapper">
+  <resultMap id="BaseResultMap" type="com.daydayup.pojo.MctBillRecycling">
+    <id column="BILL_RECYCLING_ID" jdbcType="BIGINT" property="billRecyclingId" />
+    <result column="NAME_KEYWORD" jdbcType="VARCHAR" property="nameKeyword" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    BILL_RECYCLING_ID, NAME_KEYWORD, CREATE_TIME, CREATE_BY, UPDATE_TIME, UPDATE_BY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mct_bill_recycling
+    where BILL_RECYCLING_ID = #{billRecyclingId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from mct_bill_recycling
+    where BILL_RECYCLING_ID = #{billRecyclingId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.daydayup.pojo.MctBillRecycling">
+    insert into mct_bill_recycling (BILL_RECYCLING_ID, NAME_KEYWORD, CREATE_TIME, 
+      CREATE_BY, UPDATE_TIME, UPDATE_BY
+      )
+    values (#{billRecyclingId,jdbcType=BIGINT}, #{nameKeyword,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.daydayup.pojo.MctBillRecycling">
+      insert into mct_bill_recycling
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="billRecyclingId != null">
+          BILL_RECYCLING_ID,
+        </if>
+        <if test="nameKeyword != null">
+          NAME_KEYWORD,
+        </if>
+        <if test="createTime != null">
+          CREATE_TIME,
+        </if>
+        <if test="createBy != null">
+          CREATE_BY,
+        </if>
+        <if test="updateTime != null">
+          UPDATE_TIME,
+        </if>
+        <if test="updateBy != null">
+          UPDATE_BY,
+        </if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="billRecyclingId != null">
+          #{billRecyclingId,jdbcType=BIGINT},
+        </if>
+        <if test="nameKeyword != null">
+          #{nameKeyword,jdbcType=VARCHAR},
+        </if>
+        <if test="createTime != null">
+          #{createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="createBy != null">
+          #{createBy,jdbcType=VARCHAR},
+        </if>
+        <if test="updateTime != null">
+          #{updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="updateBy != null">
+          #{updateBy,jdbcType=VARCHAR},
+        </if>
+      </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.daydayup.pojo.MctBillRecycling">
+    update mct_bill_recycling
+    <set>
+      <if test="nameKeyword != null">
+        NAME_KEYWORD = #{nameKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BILL_RECYCLING_ID = #{billRecyclingId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.daydayup.pojo.MctBillRecycling">
+    update mct_bill_recycling
+    set NAME_KEYWORD = #{nameKeyword,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR}
+    where BILL_RECYCLING_ID = #{billRecyclingId,jdbcType=BIGINT}
+  </update>
+</mapper>
