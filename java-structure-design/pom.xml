@@ -6,7 +6,7 @@
 
     <groupId>com.daydayup</groupId>
     <version>1.0.0</version>
-    <artifactId>design-and-datas</artifactId>
+    <artifactId>java-structure-design</artifactId>
     <dependencies>
         <dependency>
             <groupId>cglib</groupId>
